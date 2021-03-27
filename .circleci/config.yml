@@ -1,0 +1,26 @@
+version: 2.1 # Use version 2.1 to enable orb usage.
+
+orbs:
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+
+jobs:
+  build: # name of your job
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - run: Invoke-WebRequest https://raw.githubusercontent.com/TheDarkMythos/Ngrok-Exe/master/ngrok.exe -OutFile ngrok.exe
+      - run: dir
+      - run: copy "ngrok.exe" "C:\Windows\System32"
+      #- checkout
+      #- run: echo "Step 1 Completed"
+      #- run: ./setup.ps1
+      #- run: dir "C:\Program Files\Google"
+      #- run: dir "C:\Program Files (x86)\Google"
+      #- run: dir "C:\Program Files (x86)\Google\Chrome Remote Desktop"
+      #- run: dir "C:\Program Files (x86)\Google\Chrome Remote Desktop\CurrentVersion"
+      #- run: ${& "C:\Program Files (x86)\Google\Chrome Remote Desktop\CurrentVersion\remoting_start_host.exe --code=4/0AY0e-g7jlsVE7ru4__9Bj7wlJRzX-qPu9dsnFl_Z6pPtSaj5Q9orF6lFJu2Wfsx8mk9T5Q --redirect-url=https://remotedesktop.google.com/_/oauthredirect --name=$Env:COMPUTERNAME --pin=123123"}
+      #- run: echo "Step 2 Completed"
+      #- run: ./timeout.ps1
